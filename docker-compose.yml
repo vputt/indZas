@@ -4,6 +4,4 @@ services:
     container_name: frontend-container
     ports:
       - "80:80"
-    environment:
-      - NODE_ENV=production
     command: ["nginx", "-g", "daemon off;"]
