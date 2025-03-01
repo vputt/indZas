@@ -1,6 +1,7 @@
 services:
   frontend:
-    image: my-image
+    build: .
+    #image: my-image
     container_name: frontend-container
     ports:
       - "80:80"
