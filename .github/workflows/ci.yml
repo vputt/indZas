@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: build
-        run: docker build . --file Dockerfile --tag my-image:$(date +%s)
+        run: docker build . --file Dockerfile --tag my-image
 
       - name: run
         run: docker run --rm my-image npm test
