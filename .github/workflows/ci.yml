@@ -1,4 +1,4 @@
-name: ci/cd
+name: ci_cd
 
 on:
   push:
@@ -13,12 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: build
-        run: docker build -t my-image .
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag my-image:latest
 
-      - name: run
-        run: |
-          docker run --rm my-image npm install
-          docker run --rm my-image npm test
-      - name: deploy
+      - name: Run tests
+        run: docker run --rm my-image:latest npm test
+
+      - name: Deploy with Docker Compose
         run: docker-compose up -d
