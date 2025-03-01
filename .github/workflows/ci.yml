@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: build
-        run: docker build . --file Dockerfile --tag my-image:latest
+        run:
+          docker build . --file Dockerfile --tag my-image:latest
+          docker images
 
   test:
     runs-on: ubuntu-latest
@@ -24,6 +26,9 @@ jobs:
     steps:
       - name: check
         uses: actions/checkout@v4
+
+      - name: image
+        run: docker images
 
       - name: run
         run: docker run --rm -v $(pwd)/task/frontend:/frontend my-image npm test
