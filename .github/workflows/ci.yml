@@ -38,6 +38,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
             name: docker-image
+      - name: load image
+        run: docker load -i my-image.tar
+      - name: run
         run: docker run --rm my-image:latest npm test
 
   deploy:
@@ -50,5 +53,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: docker-image
+      - name: load image
+        run: docker load -i my-image.tar
       - name: deploy
         run: docker-compose up -d
