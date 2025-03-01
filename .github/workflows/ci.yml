@@ -1,23 +1,40 @@
-name: ci_cd
+name: CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  ci_cd:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: check
+        uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: build
         run: docker build . --file Dockerfile --tag my-image:latest
 
-      - name: Run tests
-        run: docker run --rm my-image:latest npm test
+  test:
+    runs-on: ubuntu-latest
+    needs: build
 
-      - name: Deploy with Docker Compose
+    steps:
+      - name: check
+        uses: actions/checkout@v4
+
+      - name: run
+        run: docker run --rm -v $(pwd)/task/frontend:/frontend my-image npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: check
+        uses: actions/checkout@v4
+
+      - name: deploy
         run: docker-compose up -d
