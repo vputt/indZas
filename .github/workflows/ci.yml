@@ -23,6 +23,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: list images
+        run: docker images
+
       - name: tests
         run: docker run --rm my-image npm test
 
