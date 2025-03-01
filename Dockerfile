@@ -1,6 +1,6 @@
 FROM node:18 AS build
 WORKDIR /frontend
-COPY taski/frontend/ ./
+COPY task/frontend/ ./
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
