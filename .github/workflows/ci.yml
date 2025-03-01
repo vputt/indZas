@@ -35,4 +35,5 @@ jobs:
     - name: deploy
       run:
         docker-compose up -d
-        docker ps
+    - name: check
+      run: docker ps
