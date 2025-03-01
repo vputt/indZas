@@ -16,7 +16,8 @@ jobs:
         run: docker build . --file Dockerfile --tag my-image
 
       - name: run
-        run: docker run --rm my-image npm test
-
+        run:
+          docker run --rm my-image npm install
+          docker run --rm my-image npm test
       - name: deploy
         run: docker-compose up -d
