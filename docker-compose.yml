@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: my-image-name
+    container_name: frontend-container
+    ports:
+      - "80:80"
+    command: ["nginx", "-g", "daemon off;"]
