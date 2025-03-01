@@ -15,10 +15,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: build
-      run: docker build -t my-image:latest .
+      run:
+        docker build -t my-image:latest .
+        docker save my-image:latest -o my-image.tar
 
     - name: list images
       run: docker images
+
+    - name: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: my-image.tar
 
   test:
     runs-on: ubuntu-latest
@@ -26,8 +34,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: list images
-        run: docker images
+      - name: download image
+        run:
+            actions/download-artifact@v2
+            docker load -i my-image.tar
 
       - name: tests
         run: docker run --rm my-image:latest npm test
@@ -38,5 +48,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Download and Load Docker image
+        run:
+          actions/download-artifact@v2
+          docker load -i my-image.tar
       - name: deploy
         run: docker-compose up -d
