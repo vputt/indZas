@@ -1,19 +1,10 @@
 проект нацелен на автоматизацию сборки и деплоя фронтенд-приложения с использованием Docker и GitHub Actions
+
 Структура проекта:
 
-project/
-├── task/
-│   └── frontend/
-│       ├── src/              
-│       ├── public/           
-│       ├── package.json       
-│       ├── Dockerfile         # Dockerfile для сборки образа
-│       └── ...               
-├── docker-compose.yml         # Docker Compose конфигурация
-├── nginx.conf                 # Конфигурация Nginx
-└── .github/
-    └── workflows/
-        └── ci-cd.yml          # GitHub Actions workflow
+
+![image](https://github.com/user-attachments/assets/b8b87a04-dbe6-4e98-b82c-84512b1e4ce1)
+
 
 Процесс начинается с того, что на стадии build GitHub Actions собирает Docker-образ из Dockerfile.
 Образ помечается тегом my-image:latest.
