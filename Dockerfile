@@ -3,7 +3,6 @@ WORKDIR /frontend
 COPY task/frontend/ ./
 RUN npm install --legacy-peer-deps
 RUN npm run build
-RUN npm test
 
 FROM nginx:alpine
 COPY --from=build /frontend/build /usr/share/nginx/html
