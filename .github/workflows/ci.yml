@@ -9,14 +9,15 @@ on:
 jobs:
   ci_cd:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - name: build
-        run: docker build . --file Dockerfile --tag my-image
+        run: docker build -t my-image .
 
       - name: run
-        run:
+        run: |
           docker run --rm my-image npm install
           docker run --rm my-image npm test
       - name: deploy
