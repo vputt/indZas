@@ -33,7 +33,10 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image:latest
 
     - name: deploy
-      run:
+      run: |
         docker-compose up -d
-    - name: check
-      run: docker ps
+        sleep 100
+
+    - name: test
+      run: |
+        curl http://localhost:80
