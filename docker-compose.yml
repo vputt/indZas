@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: my-image:$(date +%s)
+    image: my-image:latest
     container_name: frontend-container
     ports:
       - "80:80"
