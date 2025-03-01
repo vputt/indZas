@@ -15,7 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: build
-      run: docker build -t my-image .
+      run: docker build -t my-image:latest .
+
+    - name: list images
+      run: docker images
 
   test:
     runs-on: ubuntu-latest
@@ -27,7 +30,7 @@ jobs:
         run: docker images
 
       - name: tests
-        run: docker run --rm my-image npm test
+        run: docker run --rm my-image:latest npm test
 
   deploy:
     runs-on: ubuntu-latest
