@@ -23,7 +23,7 @@ jobs:
       run: docker images
 
     - name: upload
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: docker-image
         path: my-image.tar
@@ -35,11 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: download image
-        run:
-            actions/download-artifact@v2
-            docker load -i my-image.tar
-
-      - name: tests
+        uses: actions/download-artifact@v3
+        with:
+            name: docker-image
         run: docker run --rm my-image:latest npm test
 
   deploy:
@@ -48,9 +46,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Download and Load Docker image
-        run:
-          actions/download-artifact@v2
-          docker load -i my-image.tar
+      - name: download doker
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image
       - name: deploy
         run: docker-compose up -d
